@@ -207,26 +207,28 @@ const App = (() => {
     errEl.textContent = '';
     userData = { name, email, project };
 
-    // Submit lead to Netlify Forms (fire and forget — don't block results)
+    // Submit lead to Web3Forms (fire and forget — don't block results)
     const scores = calcScores();
     const { grade } = getGrade(scores.overall);
-    fetch('/', {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'form-name':    'scorecard-leads',
-        'name':         name,
-        'email':        email,
-        'project':      project,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key:     'fbf85759-64cc-4e9a-8a7f-764c3c64927b',
+        subject:        'New Scorecard Lead — CMaestro Studio',
+        from_name:      'CMaestro Studio Scorecard',
+        name:           name,
+        email:          email,
+        project:        project,
         'overall-score': scores.overall,
-        'grade':         grade,
-        'engagement':    scores.engagement,
-        'onboarding':    scores.onboarding,
-        'moderation':    scores.moderation,
-        'content':       scores.content,
-        'growth':        scores.growth,
-        'governance':    scores.governance,
-      }).toString(),
+        grade:           grade,
+        engagement:      scores.engagement,
+        onboarding:      scores.onboarding,
+        moderation:      scores.moderation,
+        content:         scores.content,
+        growth:          scores.growth,
+        governance:      scores.governance,
+      }),
     }).catch(() => {});
 
     showResults();
