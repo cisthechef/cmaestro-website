@@ -159,15 +159,17 @@ function submitNotify() {
   }
   errEl.textContent = '';
 
-  // Submit to Netlify Forms
-  fetch('/', {
+  // Submit to Web3Forms
+  fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      'form-name': 'product-notify',
-      'email':     email,
-      'product':   currentProduct,
-    }).toString(),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      access_key: 'fbf85759-64cc-4e9a-8a7f-764c3c64927b',
+      subject:    'Product Notify Request — ' + currentProduct,
+      from_name:  'CMaestro Studio Products',
+      email:      email,
+      product:    currentProduct,
+    }),
   }).catch(() => {});
 
   closeNotify();
