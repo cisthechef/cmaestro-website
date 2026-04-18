@@ -105,13 +105,13 @@ body {
   margin-left: auto;
 }
 
-.product-logo-mark {
+/* .product-logo-mark {
   font-family: var(--font-serif);
   font-size: 24px;
   font-weight: 600;
   color: var(--primary-lg);
   line-height: 1;
-}
+} */
 
 .product-logo-name {
   font-size: 11px;
